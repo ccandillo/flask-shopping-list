@@ -1,7 +1,11 @@
-git clone
-cd
+git clone https://github.com/tontonDuPirox/flask-shopping-list
+
+cd flask-shopping-list
+
 virtualenv venv
-. venv/activate
+
+. venv/bin/activate
+
 pip install $(cat requirements.txt)
-cd shopping-list
-python shopping-list.py
+
+python shopping-list/shopping-list.py
