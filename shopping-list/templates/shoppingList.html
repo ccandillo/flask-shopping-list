@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>Shopping List</h2>
+    {% if not shoppingList.item_list %}
+        <p>The shopping list is empty.</p>
+    {% else %}
+        <ul>
+            {% for item in shoppingList.item_list %}
+                <li class="line">
+                    <div class="row grid50{% if item.checked == 1 %} strick{% endif %}">
+                        {{ item.name }}
+                    </div>
+                    {% if item.checked == 0 %}
+                        <div class="row grid20">
+                            <form action="{{ url_for('checkItem') }}" method="post">
+                                <input type="hidden" name="id" value="{{ item.id }}" />
+                                <input type="submit" value="Check" />
+                            </form>
+                        </div>
+                    {% endif %}
+                    <div class="row grid20">
+                        <form action="{{ url_for('deleteItem') }}" method="post">
+                            <input type="hidden" name="id" value="{{ item.id }}" />
+                            <input type="submit" value="Delete" />
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <hr />
+    Add an item:
+    <form action="{{ url_for('addItem') }}" method="post">
+        <label>Item:</label> <input type="text" name="name" />
+        <input type="submit" value="Add" />
+    </form>
+
+    <hr />
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            Results:
+            <pre>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </pre>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block nav %}
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+{% endblock %}
