@@ -10,4 +10,5 @@ LICENSE
 -------
 
 This software is released under the BEER-WARE LICENSE
+
 .. include:: ../LICENSE.txt
